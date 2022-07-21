@@ -11,19 +11,37 @@
 //   { id: 4, name: "Learn XYZ", completed: false, priority: "Low" },
 // ];
 
-const todoReducer = (state = [], action) => {
-  switch (action.type) {
-    case "todoList/addTodo":
-      return [...state, action.payload];
-    case "todoList/toggleTodoList":
-      return state.map((item) =>
-        item.id === action.payload
-          ? { ...item, completed: !item.completed }
-          : item
-      );
-    default:
-      return state;
-  }
-};
+// const todoReducer = (state = [], action) => {
+//   switch (action.type) {
+//     case "todoList/addTodo":
+//       return [...state, action.payload];
+//     case "todoList/toggleTodoList":
+//       return state.map((item) =>
+//         item.id === action.payload
+//           ? { ...item, completed: !item.completed }
+//           : item
+//       );
+//     default:
+//       return state;
+//   }
+// };
 
-export default todoReducer;
+// export default todoReducer;
+
+import { createSlice } from "@reduxjs/toolkit";
+
+export const todoReducer = createSlice({
+  name: "todoList",
+  initialState: [],
+  reducers: {
+    addTodo: (state, action) => {
+      state.push(action.payload);
+    },
+    toggleTodoList: (state, action) => {
+      const currentTodo = state.find((todo) => {
+        return todo.id === action.payload;
+      });
+      currentTodo.completed = !currentTodo.completed;
+    },
+  },
+});

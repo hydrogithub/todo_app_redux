@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import { createSelector } from "@reduxjs/toolkit";
 
 export const searchTextSelector = (state) => state.filters.search;
 export const statusSelector = (state) => state.filters.status;

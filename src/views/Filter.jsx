@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ReactComponent as Search } from "../assets/search.svg";
-import { searchFilterChange } from "../redux/actions";
+// import { searchFilterChange } from "../redux/actions";
+import { filtersReducer } from "../redux/FiltersSlice";
 
 const Filter = () => {
   const [searchTask, setSearchTask] = useState("");
@@ -19,7 +20,7 @@ const Filter = () => {
           placeholder="Công việc cần tìm..."
           onChange={(e) => {
             setSearchTask(e.target.value);
-            dispatch(searchFilterChange(e.target.value));
+            dispatch(filtersReducer.actions.searchFilterChange(e.target.value));
           }}
         />
       </div>

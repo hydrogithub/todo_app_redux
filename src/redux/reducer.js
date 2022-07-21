@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
-import filtersReducer from "./FiltersSlice";
-import todoReducer from "./TodoSlice";
+import { filtersReducer } from "./FiltersSlice";
+import { todoReducer } from "./TodoSlice";
 
 // const rootReducer = (state = {}, action) => {
 //   return {
@@ -12,8 +12,8 @@ import todoReducer from "./TodoSlice";
 
 //combineReducers tự động match các action.type từ các SliceReducer
 const rootReducer = combineReducers({
-  filters: filtersReducer,
-  todoList: todoReducer,
+  filters: filtersReducer.reducer,
+  todoList: todoReducer.reducer,
 });
 
 export default rootReducer;

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, statusFilterChange, toggleTodoList } from "../redux/actions";
+// import { addTodo, statusFilterChange, toggleTodoList } from "../redux/actions";
 import { v4 as uuidv4 } from "uuid";
 import { todoRemainingSelector } from "../redux/selectors";
 import Filter from "./Filter";
+
+import { todoReducer } from "../redux/TodoSlice";
+import { filtersReducer } from "../redux/FiltersSlice";
 
 const statusList = [
   { name: "ALL", display: "Tất cả" },
@@ -22,7 +25,7 @@ const Layout = () => {
 
   const handleSubmit = () => {
     dispatch(
-      addTodo({
+      todoReducer.actions.addTodo({
         id: uuidv4(),
         name: newTask,
         completed: false,
@@ -34,7 +37,7 @@ const Layout = () => {
   };
 
   const toggleTodo = (id) => {
-    dispatch(toggleTodoList(id));
+    dispatch(todoReducer.actions.toggleTodoList(id));
   };
   return (
     <div className="container">
@@ -57,7 +60,11 @@ const Layout = () => {
                       checked={item.name === filterStatus}
                       onChange={(e) => {
                         setFilterStatus(e.target.value);
-                        dispatch(statusFilterChange(e.target.value));
+                        dispatch(
+                          filtersReducer.actions.statusFilterChange(
+                            e.target.value
+                          )
+                        );
                       }}
                     />
                     <label htmlFor={item.name}>{item.display}</label>
